@@ -25,13 +25,36 @@ class HomePage extends StatelessWidget {
                   ]),
               child: TextField(
                 decoration: InputDecoration(
+                    hintText: 'Search Pancake',
+                    hintStyle: TextStyle(
+                      color: Color(0xffDDDADA),
+                      fontSize: 15,
+                    ),
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: SvgPicture.asset("assets/icons/Search icon.svg"),
                     ),
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SvgPicture.asset("assets/icons/Filter icon.svg"),
+                    suffixIcon: Container(
+                      width: 100,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                            child: VerticalDivider(
+                              color: Color(0xffDDDADA),
+                              thickness: 1,
+                              indent: 2,
+                              endIndent: 2,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SvgPicture.asset(
+                                "assets/icons/Filter icon.svg"),
+                          ),
+                        ],
+                      ),
                     ),
                     isDense: true,
                     filled: true,
