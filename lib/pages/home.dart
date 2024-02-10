@@ -1,14 +1,16 @@
 import 'dart:io';
 
-import 'package:fitness/models/category_card.dart';
+import 'package:fitness/models/category_model.dart';
+import 'package:fitness/widgets/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<CategoryModel> categories = getCategoryList();
     return Scaffold(
         appBar: appBar(),
         body: Column(
@@ -17,9 +19,9 @@ class HomePage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
+                const SizedBox(height: 30),
+                const Padding(
+                  padding: EdgeInsets.only(left: 20.0),
                   child: Text("Category",
                       style: TextStyle(
                         color: Colors.black,
@@ -27,11 +29,22 @@ class HomePage extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       )),
                 ),
-                SizedBox(height: 15),
-                CategoryCard(
-                    iconPath: "assets/icons/salad.svg",
-                    name: "Salad",
-                    background: Color(0xff92A3FD))
+                const SizedBox(height: 15),
+                Container(
+                  margin: EdgeInsets.only(left: 20),
+                  height: 130,
+                  child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: categories.length,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: 20),
+                      itemBuilder: (BuildContext context, int index) {
+                        return CategoryCard(
+                            iconPath: categories[index].iconPath,
+                            name: categories[index].name,
+                            background: categories[index].boxColor);
+                      }),
+                ),
               ],
             )
           ],
