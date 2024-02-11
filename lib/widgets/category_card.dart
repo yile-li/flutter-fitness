@@ -16,7 +16,7 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 100,
+      width: 90,
       child: Card(
           margin: const EdgeInsets.all(0.0),
           elevation: 0.0,

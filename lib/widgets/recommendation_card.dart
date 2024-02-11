@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -18,7 +20,7 @@ class RecCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 170,
+      width: 210,
       child: Card(
           margin: const EdgeInsets.all(0.0),
           elevation: 0.0,
@@ -26,25 +28,44 @@ class RecCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(
-                width: 100,
-                height: 100,
-                child: SvgPicture.asset(iconPath),
+              SvgPicture.asset(iconPath),
+              Column(
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(info,
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: 12,
+                        fontWeight: FontWeight.w100,
+                      )),
+                ],
               ),
-              Text(
-                name,
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
+
+              Container(
+                height: 35,
+                width: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  gradient: LinearGradient(
+                      colors: [Color(0xff9DCEFF), Color(0xff92A3FD)]),
+                ),
+                child: Center(
+                  child: Text(
+                    "View",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
               ),
-              Text(info,
-                  style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 10,
-                    fontWeight: FontWeight.w100,
-                  )),
-              ElevatedButton(onPressed: () {}, child: Text("View"))
+              // ElevatedButton(onPressed: () {}, child: Text("View"))
             ],
           )),
     );

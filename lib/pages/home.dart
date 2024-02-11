@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 25),
               Container(
                 margin: EdgeInsets.only(left: 20),
-                height: 200,
+                height: 240,
                 child: ListView.separated(
                   separatorBuilder: (context, index) => SizedBox(width: 20),
                   scrollDirection: Axis.horizontal,
@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
         const SizedBox(height: 15),
         Container(
           margin: EdgeInsets.only(left: 20),
-          height: 130,
+          height: 110,
           child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: categories.length,
