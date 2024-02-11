@@ -21,34 +21,38 @@ class HomePage extends StatelessWidget {
             _searchBar(),
             _categorySection(categories),
             SizedBox(height: 25),
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Container(
-                margin: EdgeInsets.only(left: 20),
-                child: Text("Recommendation",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    )),
-              ),
-              SizedBox(height: 25),
-              Container(
-                margin: EdgeInsets.only(left: 20),
-                height: 240,
-                child: ListView.separated(
-                  separatorBuilder: (context, index) => SizedBox(width: 20),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: recommendations.length,
-                  itemBuilder: (context, index) => RecCard(
-                      iconPath: recommendations[index].iconPath,
-                      name: recommendations[index].name,
-                      background: recommendations[index].boxColor,
-                      info: recommendations[index].info),
-                ),
-              )
-            ])
+            _recommendationSection(recommendations),
           ],
         ));
+  }
+
+  Column _recommendationSection(List<RecModel> recommendations) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Container(
+        margin: EdgeInsets.only(left: 20),
+        child: Text("Recommendation",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            )),
+      ),
+      SizedBox(height: 25),
+      Container(
+        margin: EdgeInsets.only(left: 20),
+        height: 240,
+        child: ListView.separated(
+          separatorBuilder: (context, index) => SizedBox(width: 20),
+          scrollDirection: Axis.horizontal,
+          itemCount: recommendations.length,
+          itemBuilder: (context, index) => RecCard(
+              iconPath: recommendations[index].iconPath,
+              name: recommendations[index].name,
+              background: recommendations[index].boxColor,
+              info: recommendations[index].info),
+        ),
+      )
+    ]);
   }
 
   Column _categorySection(List<CategoryModel> categories) {
