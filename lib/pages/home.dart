@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:fitness/models/category_model.dart';
+import 'package:fitness/models/recommendation_model.dart';
 import 'package:fitness/widgets/category_card.dart';
+import 'package:fitness/widgets/recommendation_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -11,44 +13,75 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<CategoryModel> categories = getCategoryList();
+    List<RecModel> recommendations = getRecommendationList();
     return Scaffold(
         appBar: appBar(),
         body: Column(
           children: [
             _searchBar(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 30),
-                const Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Text("Category",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      )),
+            _categorySection(categories),
+            SizedBox(height: 25),
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Container(
+                margin: EdgeInsets.only(left: 20),
+                child: Text("Recommendation",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    )),
+              ),
+              SizedBox(height: 25),
+              Container(
+                margin: EdgeInsets.only(left: 20),
+                height: 200,
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => SizedBox(width: 20),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: recommendations.length,
+                  itemBuilder: (context, index) => RecCard(
+                      iconPath: recommendations[index].iconPath,
+                      name: recommendations[index].name,
+                      background: recommendations[index].boxColor,
+                      info: recommendations[index].info),
                 ),
-                const SizedBox(height: 15),
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  height: 130,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: categories.length,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(width: 20),
-                      itemBuilder: (BuildContext context, int index) {
-                        return CategoryCard(
-                            iconPath: categories[index].iconPath,
-                            name: categories[index].name,
-                            background: categories[index].boxColor);
-                      }),
-                ),
-              ],
-            )
+              )
+            ])
           ],
         ));
+  }
+
+  Column _categorySection(List<CategoryModel> categories) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 30),
+        const Padding(
+          padding: EdgeInsets.only(left: 20.0),
+          child: Text("Category",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              )),
+        ),
+        const SizedBox(height: 15),
+        Container(
+          margin: EdgeInsets.only(left: 20),
+          height: 130,
+          child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+              separatorBuilder: (context, index) => const SizedBox(width: 20),
+              itemBuilder: (BuildContext context, int index) {
+                return CategoryCard(
+                    iconPath: categories[index].iconPath,
+                    name: categories[index].name,
+                    background: categories[index].boxColor);
+              }),
+        ),
+      ],
+    );
   }
 
   Container _searchBar() {
