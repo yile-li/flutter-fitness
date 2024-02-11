@@ -15,14 +15,15 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        margin: const EdgeInsets.all(0.0),
-        elevation: 0.0,
-        color: background.withOpacity(0.3),
-        // elevation: 2,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
+    return SizedBox(
+      width: 100,
+      child: Card(
+          margin: const EdgeInsets.all(0.0),
+          elevation: 0.0,
+          color: background.withOpacity(0.3),
+          // elevation: 2,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
                 width: 50,
@@ -36,9 +37,6 @@ class CategoryCard extends StatelessWidget {
                   child: SvgPicture.asset(iconPath),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
               Text(
                 name,
                 style: const TextStyle(
@@ -47,7 +45,7 @@ class CategoryCard extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-        ));
+          )),
+    );
   }
 }
